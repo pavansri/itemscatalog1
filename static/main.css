@@ -1,0 +1,21 @@
+body           { font-family: Serif; background-color: #333333; background-image: url('bg.jpg') ; background-position: center; background-size: cover};
+h1               {font-family: Tahoma; color: #00FFFF }
+h1, h2, h3, h4       { color: #000000;  font-weight: bold;}
+h2          { font-family: 'Georgia', serif; margin: 0; }
+h2              { font-size: 1.2em; }
+
+
+p               { color: #51020e;}
+
+a {text-decoration: none; color:#4c0416; font-size: 1.4em;}
+
+.pane {position:absolute;  border: 4px solid; opacity: 0.8;
+    filter: alpha(opacity=60);
+    border-radius: 10px; padding: 20px; padding-top: 5px; margin: 2px; border-color: #8c8f91; background-color: #ffffff; }
+.header         {left:40%; text-align: center;}
+.name {width:50%;display: inline-block; float: left;}
+.description {}
+.price {text-align: right; width:40%; float: right; }
+.editdeletepane{}
+
+.flash          { background: #f2e3a2; }
