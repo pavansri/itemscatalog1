@@ -201,7 +201,7 @@ def restaurantMenuJSON(restaurant_id):
 
 @app.route('/restaurants/<int:restaurant_id>/menu/<int:menu_id>/JSON')
 def menuItemJSON(restaurant_id, menu_id):
-    menuItem = session.query(MenuItem).filter_by(id=menu_id).one()
+    menuItem = session.query(FoodItem).filter_by(id=menu_id).one()
     return jsonify(FoodItem=menuItem.serialize)
 
 
@@ -315,7 +315,11 @@ def newFoodItem(restaurant_id):
            methods=['GET', 'POST'])
 def editFoodItem(restaurant_id, menu_id):
     if 'username' not in login_session:
-        return redirect('/login')
+         return redirect('/login')
+    if editedItem.user_id != login_session['user_id']:
+         return "<script>{alert('Unauthorized');}</script>"
+           
+        
     editedItem = session.query(FoodItem).filter_by(id=menu_id).one()
     if request.method == 'POST':
         if request.form['name']:
@@ -323,7 +327,7 @@ def editFoodItem(restaurant_id, menu_id):
         if request.form['description']:
             editedItem.description = request.form['description']
         if request.form['price']:
-            editedItem.price = request.form['price']
+            editedItem.price = request.form['Price']
         session.add(editedItem)
         session.commit()
         flash("Menu Item has been edited")
@@ -342,6 +346,8 @@ def editFoodItem(restaurant_id, menu_id):
 def deleteFoodItem(restaurant_id, menu_id):
     if 'username' not in login_session:
         return redirect('/login')
+    if itemToDelete.user_id != login_session['user_id']:
+        return "<script>{alert('Unauthorized');}</script>"
     itemToDelete = session.query(FoodItem).filter_by(id=menu_id).one()
     if request.method == 'POST':
         session.delete(itemToDelete)
